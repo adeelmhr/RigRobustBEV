@@ -101,11 +101,7 @@ def main():
     for p_ in decoder.parameters():
         p_.requires_grad = False
 
-    # Freeze internal image backbone (feature extractor) so we only train the
-    # downstream pipeline (neck, GS renderer, heads). The 'network' argument
-    # returned by prepare_val is the instantiated GaussianLSS model; it owns
-    # an internal `backbone` module (image encoder) and optionally a
-    # `perspective_decoder` we should keep frozen as well.
+
     try:
         if hasattr(network, 'backbone') and network.backbone is not None:
             for p_ in network.backbone.parameters():
